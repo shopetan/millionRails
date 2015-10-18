@@ -1,10 +1,10 @@
 class CreateOrders < ActiveRecord::Migration
   def change
     create_table :orders do |t|
-      t.string :orderID
+      t.string :orderId
       t.integer :orderDataTime
-      t.string :orderUserID
-      t.string :orderItemID
+      t.string :orderUserId
+      t.string :orderItemId
       t.integer :orderQuantity
       t.string :orderState
       t.string :orderTags

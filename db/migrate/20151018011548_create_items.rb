@@ -1,7 +1,7 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.string :itemID
+      t.string :itemId
       t.string :itemSupplier
       t.integer :itemStockQuantity
       t.integer :itemBasePrice

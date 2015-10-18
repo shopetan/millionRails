@@ -21,6 +21,7 @@ gem 'ransack'
 #PageNation
 gem 'kaminari'
 
+gem 'parallel'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

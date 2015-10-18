@@ -1,10 +1,9 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.string :userID
+      t.string :userId
       t.string :userCompany
       t.integer :userDiscountRate
-
       t.timestamps null: false
     end
   end

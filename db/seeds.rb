@@ -6,31 +6,40 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'parallel'
+
+
 File.foreach('vendor/user/user.tsv') do |line|
   next if $. == 0
   line = line.chomp
   
   items = line.split("\t")
+  Parallel.each(items, in_threads: 10) {|item1,item2,item3|
+    print(item1)
+    print(item2)
+    print(item3)
+    User.create({ :userId => item1,
+                  :userCompany => item2,
+                  :userDiscountRate => item3})
+  }
   
-  User.create({ :userID => items[0],
-                :userCompany => items[1],
-                :userDiscountRate => items[2]})
 end
-print("user okay")
+print("user okay\n")
 
 File.foreach('vendor/item/item.tsv') do |line|
   next if $. == 0
   line = line.chomp
   
   items = line.split("\t")
-  
-  Item.create({ :itemID => items[0],
-                :itemSupplier => items[1],
-                :itemStockQuantity => items[2],
-                :itemBasePrice => items[3],
-                :itemTags => items[4]})
+  Parallel.each(items, in_threads: 2) {|item|
+    Item.create({ :itemId => item[0],
+                  :itemSupplier => item[1],
+                  :itemStockQuantity => item[2],
+                  :itemBasePrice => item[3],
+                  :itemTags => item[4]})
+  }
 end
-print("item okay")
+print("item okay\n")
 
 File.foreach('vendor/order/order.tsv') do |line|
   next if $. == 0
@@ -38,12 +47,14 @@ File.foreach('vendor/order/order.tsv') do |line|
   
   items = line.split("\t")
   
-  Order.create({ :orderID => items[0],
-                 :orderDataTime => items[1],
-                 :orderUserID => items[2],
-                 :orderItemID => items[3],
-                 :orderQuantity => items[4],
-                 :orderState => items[5],
-                 :orderTags => items[6]})
+  Parallel.each(items, in_threads: 2) {|item|
+    Order.create({ :orderId => item[0],
+                   :orderDataTime => item[1],
+                   :orderUserId => item[2],
+                   :orderItemId => item[3],
+                   :orderQuantity => item[4],
+                   :orderState => item[5],
+                   :orderTags => item[6]})
+  }
 end
-print("order okay")
+print("order okay\n")

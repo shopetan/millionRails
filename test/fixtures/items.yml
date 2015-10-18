@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  itemID: MyString
+  itemSupplier: MyString
+  itemStockQuery: 1
+  itemBasePrice: 1
+  itemTags: MyString
+
+two:
+  itemID: MyString
+  itemSupplier: MyString
+  itemStockQuery: 1
+  itemBasePrice: 1
+  itemTags: MyString
